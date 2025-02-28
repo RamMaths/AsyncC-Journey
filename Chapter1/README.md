@@ -58,7 +58,7 @@ Tasks can run independently without waiting for other tasks’ instructions to f
 
 Concurrency happens when many execution paths can run in overlapping time periods with interleaved execution, while parallelism happens when these tasks are executed at the same time by different CPU units, exploiting available multicore resources.
 
-![ConcurrencyParallelism](./images/workpool.png)
+![ConcurrencyParallelism](./images/concurrencyparallelism.png)
 
 Parallelism can exist without concurrency (without interleaved time periods) and concurrency without parallelism (by multitasking by time-sharing on a single-core CPU).
 
@@ -97,5 +97,3 @@ With dataflow programming, a program is designed as a directed graph of nodes re
 ### Degree of parallelism
 
 Degree of parallelism (DOP) is a metric that indicates the number of operations being simultaneously executed by a computer. It is useful to describe the performance of parallel programs and multi-processor systems.
-
-### Amdahl’s law
