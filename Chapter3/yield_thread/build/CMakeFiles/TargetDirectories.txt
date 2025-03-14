@@ -1,3 +1,0 @@
-/home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter3/yield_thread/build/CMakeFiles/my_program.dir
-/home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter3/yield_thread/build/CMakeFiles/edit_cache.dir
-/home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter3/yield_thread/build/CMakeFiles/rebuild_cache.dir
