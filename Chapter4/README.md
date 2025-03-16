@@ -17,3 +17,15 @@ A calling thread may acquire the same mutex more than once. It will own the mute
 
 - **Shared**: Several threads can share the ownership of the same mutex. Shared ownership is acquired/ released calling lock_shared(), try_lock_shared()/unlock shared(). While at least one thread has acquired shared access to the lock, no other thread can get exclusive access to it, but it can acquire shared access.
 - **Exclusive**: Only one thread can own the mutex. Exclusive ownership is acquired/released by calling lock(), try_lock()/unlock(). While a thread has acquired exclusive access to the lock, no other thread can acquire either shared or exclusive access to it
+
+## Timed mutex types
+
+They are similar to their non-timed counterparts and implement the following additional functions to allow waiting for the lock to be available for a specific period of time:
+- `try_lock_for()`: Tries to lock the mutex and blocks the thread until the specified time duration has elapsed (timed out). If the mutex is locked before the specified time duration, then it returns true; otherwise, it returns false. If the specified time duration is less than or equal to zero (`timeout_duration.zero()`), then the function behaves exactly like `try_lock()`. This function may block for longer than the specified duration due to scheduling or contention delays.
+- `try_lock_until()`: Tries to lock the mutex until the specified timeout time or the mutex is locked, whichever comes first. In this case, we specify an instance in the future as a limit for the waiting.
+
+## Problems when using locks
+
+### Deadlocks
+
+This is called a deadlock because both threads will be blocked forever waiting for each other to release the required mutex.
