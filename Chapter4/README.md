@@ -29,3 +29,39 @@ They are similar to their non-timed counterparts and implement the following add
 ### Deadlocks
 
 This is called a deadlock because both threads will be blocked forever waiting for each other to release the required mutex.
+
+### Livelocks
+
+The threads are unable to do anything but acquire a lock, wait, release the lock, and do the same again. This situation is called livelock because the threads are not just waiting forever (as in the deadlock case), but they are kind of alive and acquire and release a lock continuously.
+
+## Generic lock management
+
+|Mutex Manager Class|Supported Mutex types|Mutexes Managed|
+|---|---|---|
+|`std::lock_guard`|All|1|
+|`std::scoped_lock`|All|Zero or more|
+|`std::unique_lock`|All|1|
+|`std::shared_lock`|`std::shared_mutex` `std::shared_timed_mutex`|1|
+
+### std::lock_guard
+
+The std::lock_guard class is a Resource Acquisition Is Initialization (RAII) class that makes it easier to use mutexes and guarantees that a mutex will be released when the lock_guard destructor is called and automatically acquires the mutex in its constructor.
+
+### std::unique_lock
+
+The std::unique_lock constructor accepts a tag as its second parameter to indicate what we want to do with the underlying mutex. There are three options:
+- `std::defer_lock`: Does not acquire ownership of the mutex. The mutex is not locked in the constructor, and it will not be unlocked in the destructor if it is never acquired.
+- `std::adopt_lock`: Assumes that the mutex has been acquired by the calling thread. It will be released in the destructor. This option is also available for `std::lock_guard`.
+- `std::try_to_lock`: Try to acquire the mutex without blocking.
+
+### std::scoped_lock
+
+The main difference is that std::unique_lock, as its name implies, just wraps one mutex, but std::scoped_lock wraps zero or more mutexes. Also, the mutexes are acquired in the order they are passed to the std::scoped_lock constructor, hence avoiding deadlock.
+
+### std::shared_lock
+
+The std::shared_lock class is another general-purpose mutex ownership wrapper. As with std::unique_lock and std::scoped_lock, it allows deferred locking and transferring the lock ownership.
+
+## Condition variables
+
+Condition variables are another synchronization primitive provided by the C++ Standard Library. They allow multiple threads to communicate with each other. They also allow for several threads to wait for a notification from another thread. Condition variables are always associated with a mutex.
