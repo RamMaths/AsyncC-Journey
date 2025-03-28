@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter4/latches_and_barriers/build",
+  "command": "/usr/bin/c++   -std=gnu++20 -o CMakeFiles/my_program.dir/main.cpp.o -c /home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter4/latches_and_barriers/main.cpp",
+  "file": "/home/ram/Documents/Programming/c++/AsyncC++Journey/Chapter4/latches_and_barriers/main.cpp",
+  "output": "CMakeFiles/my_program.dir/main.cpp.o"
+}
+]

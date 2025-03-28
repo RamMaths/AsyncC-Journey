@@ -65,3 +65,38 @@ The std::shared_lock class is another general-purpose mutex ownership wrapper. A
 ## Condition variables
 
 Condition variables are another synchronization primitive provided by the C++ Standard Library. They allow multiple threads to communicate with each other. They also allow for several threads to wait for a notification from another thread. Condition variables are always associated with a mutex.
+
+## Semaphore
+
+A **semaphore** is a counter that manages the number of permits available for accessing a shared resource. The can be classified into two main types:
+
+- A **binary semaphore**: is like a mutex. It has only two states: 0 and 1.
+- A **counting semaphore**: can have a value grater than 1.
+
+### Binary semaphore
+
+Binary semaphores can be used to implement mutual exclusion. This is achieved by using a binary semaphore to control access to the resource.
+
+The most significant difference between mutexes and semaphores is that mutexes have exclusive ownership, whereas binary semaphores do not. Only the thread owning the mutex can release it. Semaphores can be signaled by any thread.
+
+### Counting semaphores
+
+A counting semaphore allows access to a shared resource by more than one thread. The counter can be initialized to an arbitrary number, and it will be decreased every time a thread acquires the semaphore.
+
+## Barriers and latches
+
+### std::latch
+
+The `std::latch` latch is a synchronization primitive that allows one or more threads to block until a specified number of operations are completed. It is a single-use object, and once the count reaches zero, it cannot be reset.
+
+### std::barrier
+
+The `std::barrier` barrier is another synchronization primitive used to synchronize a group of threads. The std::barrier barrier is reusable. Each thread reaches the barrier and waits until all participating threads reach the same barrier point (like what happens when we use latches).
+
+When to use latches and when to use barriers? Use `std::latch` when you have a one-time gathering point for threads, such as waiting for multiple initializations to complete before proceeding. Use `std::barrier` when you need to synchronize threads repeatedly through multiple phases of a task or iterative computations.
+
+## Performing a task only once
+
+Sometimes, we need to perform a certain task just one time. For example, in a multithreaded application, several threads may run the same function to initialize a variable. Any of the running threads may do it, but we want the initialization to be done exactly once.
+
+The C++ Standard Library provides both `std::once_flag` and `std::call_once` to implement exactly that functionality. We will see how to implement this functionality using atomic operations  in the next chapter.
